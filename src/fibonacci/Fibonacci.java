@@ -37,26 +37,25 @@ public class Fibonacci {
         // TODO code application logic here
     }
     private static long fibonacciIterative(int n) throws InterruptedException {
-        long[] arr = new long[n + 1];
-        arr[0] = 0;
-        arr[1] = 1;
-        for (int i = 2; i <= n; i++) {
-            // Thread.sleep(1);
-            arr[i] = arr[i - 1] + arr[i - 2];
+
+        long a = 0, b = 1;
+        
+        for (int i = 1; i < n; ++i) {
+            long t = b;
+            b += a;
+            a = t;
         }
-        return arr[n];
+        return b;
     }
 
     private static long fibonacciTail(int n) {
-        if (n == 0)
-            return 0;
-        return fibHelper(n, 1, 0, 1);
+        return fibTailHelper(n, 0, 1);
     }
 
-    private static long fibHelper(int n, int m, long fibM_minus_one, long fibM) {
-        if (n == m)
-            return fibM;
-        return fibHelper(n, m + 1, fibM, fibM_minus_one + fibM);
+    private static long fibTailHelper(int n, long a, long b) {
+        if (n == 1)
+            return b;
+        return fibTailHelper(n-1, b, a + b);
     }
     
 }
